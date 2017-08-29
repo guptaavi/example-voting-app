@@ -1,10 +1,23 @@
 pipeline {
     agent any
-
+    environmwnt {
+       DH = credentials('0d3dbd0c-ab07-466b-85e2-ac9506e98323')
+    }
     stages {
         stage('Build') {
             steps {
-		sh 'cd vote && docker build -t avinashg/voting-app .'
+		sh '''
+			cd vote 
+			docker build -t avinashg/voting-app .
+		'''
+	    }                    
+	}
+        stage('Deploy') {
+            steps {
+		sh '''
+			docker login -u ${DH_USR} -p ${DH_PSW}
+			docker push avinashg/voting-app
+		'''
 	    }                    
 	}
     }
