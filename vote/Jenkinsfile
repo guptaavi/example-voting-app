@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    environmwnt {
+    environment {
        DH = credentials('0d3dbd0c-ab07-466b-85e2-ac9506e98323')
     }
     stages {
